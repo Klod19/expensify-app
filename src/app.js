@@ -22,8 +22,8 @@ console.log("isEmail: " + validator.isEmail("test@gmail.com"));
 import React from "react";
 import ReactDOM from "react-dom";
 
-// IMPORT React Router, with 2 elements:
-import {BrowserRouter, Route} from "react-router-dom";
+// IMPORT React Router, with 3 elements:
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 //import the css normalizer, to reset the default styles of the different browsers
 import "normalize.css/normalize.css";
@@ -38,6 +38,10 @@ import "./styles/styles.scss";
 // I need to put them in a div, because BrowserRouter accepts only ONE child
 // Route has also prop "exact = {true}" --> witout it, as matching path will be considered everything
 // that matches, also "/create" for the first page, because it has "/"
+// <Switch> goes through all the <Route>, one by one, from top to bottom; 
+// when it finds one matching it returns it and stops; 
+// if it finds no matches, the 404 message is returned, because it is at the bottom,
+// and without any setting would be always rendered, because no path = always appears, it's "universal"
 
 const ExpenseDashboardPage = () => (
     <div> 
@@ -63,16 +67,23 @@ const HelpPage = () => (
     </div>
 );
 
+const NotFoundPage = () => {
+    <div>
+        404!
+    </div>
+}
+
 //here I define the BrowserRouter configuration
 // to have mul
 const routes = (
     <BrowserRouter>
-        <div>
+        <Switch>
             <Route path="/" component={ExpenseDashboardPage} exact={true}/>
             <Route path="/create" component={AddExpensePage}/>
             <Route path="/edit" component={EditExpensePage}/>
             <Route path="/help" component={HelpPage}/>
-        </div>
+            <Route component={NotFoundPage}/>
+        </Switch>
     </BrowserRouter>
 );
 
