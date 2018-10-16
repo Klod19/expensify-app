@@ -1,0 +1,1 @@
+Keep track of your expenses; made with React and Redux
