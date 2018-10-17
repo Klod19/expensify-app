@@ -22,8 +22,8 @@ console.log("isEmail: " + validator.isEmail("test@gmail.com"));
 import React from "react";
 import ReactDOM from "react-dom";
 
-// IMPORT React Router, with 3 elements:
-import {BrowserRouter, Route, Switch, Link} from "react-router-dom";
+// IMPORT React Router, with 4 elements:
+import {BrowserRouter, Route, Switch, Link, NavLink} from "react-router-dom";
 
 //import the css normalizer, to reset the default styles of the different browsers
 import "normalize.css/normalize.css";
@@ -76,20 +76,21 @@ const NotFoundPage = () => (
 );
 
 // make an header to be shown in each page (by adding it before Switch); 
-// it also has links to all the pages
+// it also has links to all the pages (NavLink, better suited for navigation than Link)
+// NavLinks has props like activeClassName, to customize the active link
+// has also prop "exact", so the style is applied ONLY when JUST "/" is matched (and not the rest)
 
 const Header = () => (
     <header>
         <h1> Expensify App</h1>
-        <Link to="/"> to Home page| </Link>
-        <Link to="/create"> create an Expense| </Link>
-        <Link to="/edit"> edit Expenses| </Link>
-        <Link to="/help"> get help </Link>
+        <NavLink to="/" activeClassName="is-active" exact={true}> to Home page| </NavLink>
+        <NavLink to="/create" activeClassName="is-active"> Create Expense| </NavLink>
+        <NavLink to="/edit" activeClassName="is-active"> Edit Expenses| </NavLink>
+        <NavLink to="/help" activeClassName="is-active"> Get Help </NavLink>
     </header>
 );
 
 //here I define the BrowserRouter configuration
-// to have mul
 const routes = (
     <BrowserRouter>
         <div>
