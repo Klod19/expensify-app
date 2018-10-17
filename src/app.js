@@ -23,7 +23,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // IMPORT React Router, with 3 elements:
-import {BrowserRouter, Route, Switch} from "react-router-dom";
+import {BrowserRouter, Route, Switch, Link} from "react-router-dom";
 
 //import the css normalizer, to reset the default styles of the different browsers
 import "normalize.css/normalize.css";
@@ -45,45 +45,63 @@ import "./styles/styles.scss";
 
 const ExpenseDashboardPage = () => (
     <div> 
-        This is from my Dashboard component
+        This is from my Dashboard component - Home Page
     </div>
 );
 
 const AddExpensePage = () => (
     <div> 
-        This is from my AddExpense Component
+        This is from my AddExpense Component - Add Expense Page
     </div>
 );
 
 const EditExpensePage = () => (
     <div>
-        Edit expense
+        Edit Expense
     </div>
 );
 
 const HelpPage = () => (
     <div>
-        help page
+        Help Page
     </div>
 );
 
-const NotFoundPage = () => {
+
+// "Link" component is a React component, allows client-side routing
+const NotFoundPage = () => (
     <div>
-        404!
+        404 - <Link to="/">to Home Page</Link>
     </div>
-}
+);
+
+// make an header to be shown in each page (by adding it before Switch); 
+// it also has links to all the pages
+
+const Header = () => (
+    <header>
+        <h1> Expensify App</h1>
+        <Link to="/"> to Home page| </Link>
+        <Link to="/create"> create an Expense| </Link>
+        <Link to="/edit"> edit Expenses| </Link>
+        <Link to="/help"> get help </Link>
+    </header>
+);
 
 //here I define the BrowserRouter configuration
 // to have mul
 const routes = (
     <BrowserRouter>
-        <Switch>
-            <Route path="/" component={ExpenseDashboardPage} exact={true}/>
-            <Route path="/create" component={AddExpensePage}/>
-            <Route path="/edit" component={EditExpensePage}/>
-            <Route path="/help" component={HelpPage}/>
-            <Route component={NotFoundPage}/>
-        </Switch>
+        <div>
+            <Header/>
+            <Switch>
+                <Route path="/" component={ExpenseDashboardPage} exact={true}/>
+                <Route path="/create" component={AddExpensePage}/>
+                <Route path="/edit" component={EditExpensePage}/>
+                <Route path="/help" component={HelpPage}/>
+                <Route component={NotFoundPage}/>
+            </Switch>
+        </div>
     </BrowserRouter>
 );
 
