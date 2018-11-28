@@ -16,7 +16,11 @@ const path = require("path");
 
 module.exports = {
     //set the entry point; tells webpack where to start
-    entry : "./src/app.js",
+    //entry : "./src/app.js",
+    entry: "./src/playground/redux-expensify.js",
+    // entry: "./src/playground/redux-101.js",
+    //entry: "./src/playground/E6-destructuring.js",
+    
     //set the output, equal to an object
     output : {
         //ABSOLUTE PATH on the machine where i want to output the webpack file (here, the "public" folder)
