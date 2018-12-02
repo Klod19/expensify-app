@@ -24,6 +24,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import AppRouter from "./routers/AppRouter"
 
+// import the Provider component from react-redux library, to connect store and components
+import {Provider} from "react-redux"; 
+
 //import the css normalizer, to reset the default styles of the different browsers
 import "normalize.css/normalize.css";
 
@@ -39,6 +42,8 @@ import getVisibleExpenses from "./selectors/expenses";
 
 
 
+
+
 // store exports a function, get it!
 const store = configureStore();
 
@@ -46,13 +51,26 @@ const expenseOne = store.dispatch(addExpense({"description" : "Water bill"}));
 const expenseTwo = store.dispatch(addExpense({"description" : "Gas bill"}));
 // store.dispatch(setTextFilter("bill"));
 store.dispatch(setTextFilter("water"));
+
+setTimeout( () => {
+    store.dispatch(setTextFilter("rent"));
+}, 3000)
+
+
 const state = store.getState();
 const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
 console.log(visibleExpenses);
 
+// to share the store with the rest of the application, include between Provider tags, which have "store" as props:
+// "store" is equal to the redux store
 
+const jsx = (
+    <Provider store={store}>
+        <AppRouter />
+    </Provider>
+);
 
 const app = document.getElementById("app");
 
 
-ReactDOM.render(<AppRouter />, app);
+ReactDOM.render(jsx, app);
