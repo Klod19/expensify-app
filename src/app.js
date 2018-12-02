@@ -30,7 +30,25 @@ import "normalize.css/normalize.css";
 // I have to import the .css file
 import "./styles/styles.scss";
 
+// IMPORT THE STORE FOR REDUX!
+import configureStore from "./store/configureStore";
+//import some redux functions
+import {addExpense} from "./actions/expenses.js";
+import {setTextFilter} from "./actions/filters.js";
+import getVisibleExpenses from "./selectors/expenses";
 
+
+
+// store exports a function, get it!
+const store = configureStore();
+
+const expenseOne = store.dispatch(addExpense({"description" : "Water bill"}));
+const expenseTwo = store.dispatch(addExpense({"description" : "Gas bill"}));
+// store.dispatch(setTextFilter("bill"));
+store.dispatch(setTextFilter("water"));
+const state = store.getState();
+const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+console.log(visibleExpenses);
 
 
 
