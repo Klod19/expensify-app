@@ -18,10 +18,9 @@ const Info = (props) => (
 
 
 // HIGHER ORDER COMPONENT:
-// here is a stateless functional component; it that WRAPS other components, 
+// here is a function that returns the HOC; the HOC wraps other components, 
 // so I can reuse its code 
 // here it adds a warning if specific conditions are met AND in any case renders the component passed in
-
 
 const withAdminWarning = (WrappedComponent) => {
     return (props) => (
@@ -35,12 +34,23 @@ const withAdminWarning = (WrappedComponent) => {
     
 };
 
-// and then call it in a const and make it wrap Info, to render it later on;
-// this will be an ALTERNATIVE version of the Info component; 
-// an higher order component
+// another function that returns an HOC: requireAuthentication
 
-const AdminInfo = withAdminWarning(Info)
+const requireAuthentication = (WrappedComponent) => {
+    return (props) => (
+        <div>
+            {props.isAuthenticated ? <WrappedComponent {...props} /> : <p>Please login to view the info</p>}
+        </div>
+    );
+};
+
+// and then store the functions that return the HOCs in a const and make them wrap Info, to render it later on;
+// these will be ALTERNATIVE versions of the Info component: higher order components
+
+const AdminInfo = withAdminWarning(Info);
+const AuthInfo = requireAuthentication(Info);
 
 const app = document.getElementById("app");
 
-ReactDOM.render(<AdminInfo isAdmin={true} info="There are the warnings" />, app)
+// ReactDOM.render(<AdminInfo isAdmin={true} info="There are the warnings" />, app);
+ReactDOM.render(<AuthInfo isAuthenticated={true} info="There are the warnings" />, app);
