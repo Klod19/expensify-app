@@ -1,12 +1,16 @@
 import React from "react";
 //import function to connect component to redux store
 import { connect} from "react-redux";
+import ExpenseListItem from "./ExpenseListItem";
 
 const ExpenseList = (props) => (
     <div>
-        <h1>Expense List</h1>
-        {props.filters.text}
-        {props.expenses.length}
+        <h1>Expense List ({props.expenses.length} item/s)</h1>
+        {/*we will get the destructured expense object, obtaining all the props that we need*/}
+        {props.expenses.map( (expense) => {
+            return <ExpenseListItem key={expense.id}{...expense} />; 
+            }  
+        )}
     </div>
 );
 

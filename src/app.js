@@ -47,14 +47,14 @@ import getVisibleExpenses from "./selectors/expenses";
 // store exports a function, get it!
 const store = configureStore();
 
-const expenseOne = store.dispatch(addExpense({"description" : "Water bill"}));
-const expenseTwo = store.dispatch(addExpense({"description" : "Gas bill"}));
+const expenseOne = store.dispatch(addExpense({"description" : "Water bill", "amount":100, createdAt:-1000}));
+const expenseTwo = store.dispatch(addExpense({"description" : "Gas bill", "amount":150, "createdAt":1000}));
 // store.dispatch(setTextFilter("bill"));
 store.dispatch(setTextFilter("water"));
 
-setTimeout( () => {
-    store.dispatch(setTextFilter("rent"));
-}, 3000)
+// setTimeout( () => {
+//     store.dispatch(setTextFilter("rent"));
+// }, 3000)
 
 
 const state = store.getState();
@@ -63,6 +63,7 @@ console.log(visibleExpenses);
 
 // to share the store with the rest of the application, include between Provider tags, which have "store" as props:
 // "store" is equal to the redux store
+// Provider let us to define the store that we want to provide to all our components
 
 const jsx = (
     <Provider store={store}>
