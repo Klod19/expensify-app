@@ -47,14 +47,16 @@ import getVisibleExpenses from "./selectors/expenses";
 // store exports a function, get it!
 const store = configureStore();
 
-const expenseOne = store.dispatch(addExpense({"description" : "Water bill", "amount":100, createdAt:-1000}));
-const expenseTwo = store.dispatch(addExpense({"description" : "Gas bill", "amount":150, "createdAt":1000}));
-// store.dispatch(setTextFilter("bill"));
-store.dispatch(setTextFilter("water"));
+store.dispatch(addExpense({"description" : "Water bill", "amount":100}));
+store.dispatch(addExpense({"description" : "Gas bill", "amount":150, "createdAt":1000}));
+store.dispatch(addExpense({"description" : "Rent", "amount":250, }));
 
-setTimeout( () => {
-    store.dispatch(setTextFilter("bill"));
-}, 3000)
+// store.dispatch(setTextFilter("bill"));
+// store.dispatch(setTextFilter("water"));
+
+// setTimeout( () => {
+//     store.dispatch(setTextFilter("bill"));
+// }, 3000)
 
 
 const state = store.getState();
