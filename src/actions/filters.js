@@ -1,6 +1,6 @@
 //here store the action generators for the filters
 
-// ACTION TO SET TEXT FILTER; if no tex value is provided, implicitly return an empty 
+// ACTION TO SET TEXT FILTER; if no text value is provided, implicitly return an empty string
 // it's in the filter reducer!
 export const setTextFilter = (text = "") => ({
     type: "SET_TEXT_FILTER",
